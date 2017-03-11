@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model IEnumerable<DocuSign.eSign.Model.Envelope>
+
+<div class="jumbotron">
+    <h1>ASP.NET DocuSign Sample Application</h1>
+    <p class="lead">This is a sample application to show how to use the DocuSign C# SDK with a website.</p>
+    <p><a href="https://jeremylindsayni.wordpress.com/2017/03/09/digitally-signing-documents-with-docusign-and-integrating-with-c/" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Documents issued</h2>
+        <p>
+            @Html.ActionLink("Create a Document >>", "CreateDocument", "Home", new { @class = "btn btn-default" })
+        </p>
+        <p>
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>Unique identifier</th>
+                    <th>Status</th>
+                    <th>Last Status Change Date</th>
+                </tr>
+                @foreach(var envelope in Model)
+                {
+                    <tr>
+                        <td>@envelope.EnvelopeId</td>
+                        <td>@envelope.Status</td>
+                        <td>@Convert.ToDateTime(envelope.StatusChangedDateTime).ToString("ddd, dd MMM yyyy HH:mm:ss")</td>
+                    </tr>
+                }
+            </table>
+        </p>
+    </div>
+</div>
